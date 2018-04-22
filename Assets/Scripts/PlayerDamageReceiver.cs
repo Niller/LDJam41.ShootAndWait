@@ -17,6 +17,7 @@ namespace DefaultNamespace
 
             GameManager.Instance.EndGame = true;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             
             Destroy(gameObject);
             

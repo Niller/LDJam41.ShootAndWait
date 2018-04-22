@@ -58,9 +58,7 @@ namespace DefaultNamespace
         private void Update()
         {
             var damageReceiver = Player.GetComponent<PlayerDamageReceiver>();
-            Health.value = damageReceiver.Health / (float) damageReceiver.MaxHealth;
-            
-            
+            Health.value = damageReceiver.Health / (float) damageReceiver.MaxHealth;                       
         }
 
         private void UpdateUi()
@@ -69,7 +67,7 @@ namespace DefaultNamespace
             TurnBasedCircle.fillAmount = _actor.CurrentActionPoints / _actor.MaxActionPoints;
             SkipTurnNotification.SetActive(_actor.YourTurn && _actor.CurrentActionPoints <= 0);          
             EnemyTurnNotification.SetActive(!_actor.YourTurn);
-            Aim.SetActive(_actor.YourTurn);  
+            Aim.SetActive(!GameManager.Instance.EndGame && _actor.YourTurn);  
         }
 
         public void OnNextTurnButtonClicked()

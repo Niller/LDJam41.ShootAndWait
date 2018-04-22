@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 _oldPosition;
     private Quaternion _oldRotation;
     private float _oldPoints;
+    private float _turnTime;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class EnemyController : MonoBehaviour
         Obstacle.enabled = false;
         Agent.SetDestination(Target.transform.position);
         _oldPoints = Actor.CurrentActionPoints;
+        _turnTime = 0f;
     }
 
     private void Update()
@@ -49,11 +51,21 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        _turnTime += Time.deltaTime;
+
         UpdateLogic();
 		
         _oldPosition = transform.position;
         _oldRotation = transform.rotation;
         _oldPoints = Actor.CurrentActionPoints;
+
+        if (_turnTime >= 10f)
+        {
+            Agent.isStopped = true;
+            Agent.enabled = false;
+            Obstacle.enabled = true;
+            Actor.EndTurn();
+        }
     }
 
     private void UpdateLogic()

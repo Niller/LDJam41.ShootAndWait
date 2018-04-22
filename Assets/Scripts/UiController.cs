@@ -33,6 +33,7 @@ namespace DefaultNamespace
             }
             
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             GameManager.Instance.IsPause = true;
             HudController.Instance.Aim.SetActive(false);
             HudController.Instance.HealthBarContainer.SetActive(false);
@@ -52,6 +53,7 @@ namespace DefaultNamespace
 
         public void OpenWinDialog()
         {
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             HudController.Instance.Aim.SetActive(false);
             if (GameSettings.CurrentDifficulty < 2)
@@ -66,6 +68,7 @@ namespace DefaultNamespace
 
         public void CloseHintWindow()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             GameManager.Instance.IsPause = false;
             HudController.Instance.Aim.SetActive(true);
